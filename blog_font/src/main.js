@@ -27,9 +27,14 @@ var store=new vuex.Store({
   },
   actions:{
       getData({commit},_this){
-        _this.axios.get("/api/front_article/getArticleAll").then(function(data){
-          console.log(data)
-          commit("Ajax",data.data);
+        return new Promise(function(reslove,reject){
+            _this.axios.get("/api/front_article/getArticleAll").then(function(data){ 
+            commit("Ajax",data.data.data);
+            _this.$router.push({path:"/index"})
+            reslove("ok")
+           },function(err){
+             reject(err)
+           })
         })
 
       }

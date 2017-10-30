@@ -45,19 +45,21 @@
            <!--end-->
            <div class="link">
             <h2>友情链接</h2>
-            <p><a href="http://www.duanliang920.com">段亮个人博客</a></p>
+            <p><a href="http://www.baidu.com">百度一下</a></p>
            </div>
     </div>
     </template>
     <script>
-      import index_right from "./index_right"
+     import {mapState} from 'vuex'
       export default {
-        props:["data_right"],
         data(){
           return{
 
           }
         },
+        computed:{
+          ...mapState(["datas"])
+        }
         
       }
     </script>

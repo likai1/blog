@@ -55,7 +55,7 @@ router.get("/getArticleAll", function(req, res, next) {
         var selectArtSql = `select * from (`
         data.forEach(function(i, index) {
             if (index < (data.length - 1)) {
-                selectArtSql += `select * from ${i.enname} UNION ALL`
+                selectArtSql += `select * from ${i.enname} UNION ALL `
             } else {
                 selectArtSql += ` select * from ${i.enname})as tabel_all where art_show=1 order by time desc`
             }
@@ -121,9 +121,9 @@ router.get("/getArticle", function(req, res, next) {
         var selectArtSql = `select * from (`
         data.forEach(function(i, index) {
             if (index < (data.length - 1)) {
-                selectArtSql += `select * from ${i.enname} UNION ALL`
+                selectArtSql += `select * from ${i.enname} UNION ALL `
             } else {
-                selectArtSql += ` select * from ${i.enname})as tabel_all where id='${req.query.id}' and art_show=1 order by time desc`
+                selectArtSql += ` select * from ${i.enname}) as tabel_all where id='${req.query.id}' and art_show=1 order by time desc`
             }
 
         }, this);

@@ -28,11 +28,11 @@
          <!--left-->
 <div class="left" id="c_left">
    
-   <index_left :data_left="datas"></index_left> 
+   <index_left></index_left> 
    
 </div>
 <div class="right" id="c_right">
-<index_right :data_right="datas"></index_right>
+<index_right></index_right>
 </div>
          <div class="clear"></div>
     </div>
@@ -40,17 +40,7 @@
     <!--footer start-->
     <div id="footer">
      <p>Design by:<a href="http://www.duanliang920.com" target="_blank">少年</a> 2014-8-9</p>
-       <div class="block">
-    <el-pagination
-      @size-change="handleSizeChange"
-      @current-change="handleCurrentChange"
-      :current-page="currentPage4"
-      :page-sizes="[100, 200, 300, 400]"
-      :page-size="100"
-      layout="total, sizes, prev, pager, next, jumper"
-      :total="400">
-    </el-pagination>
-  </div>
+       
     </div>
   </div>
 </template>
@@ -58,40 +48,36 @@
 <script>
   import index_left from "./index_left"
   import index_right from "./index_right"
-  import {
-    mapState,
-    mapActions
-  } from 'vuex'
-
+  
+  import {mapState} from "vuex"
   export default {
     methods: {
-      ...mapActions(["getData"]),
-     
-      handleSizeChange(val) {
-        console.log(`每页 ${val} 条`);
-      },
-      handleCurrentChange(val) {
-        console.log(`当前页: ${val}`);
-      }
+
     },
     data() {
       return {
-        currentPage1: 5,
-        currentPage2: 5,
-        currentPage3: 5,
-        currentPage4: 4
+        
       };
     },
+    computed:{
+        ...mapState({
+          data:state=>state.datas
+          
+        })
+     },
     components:{
           index_left,
           index_right
       },
-    computed:{
-      ...mapState(["datas"])
-    },
-    created(){
-      this.getData(this)
-    }
+      beforeRouteEnter(to,from,next){
+          next(vm=>{
+            console.log(vm)
+            if(!vm.data){
+              vm.$router.push("/")
+            }
+          })
+      }
+    
   }
 </script>
 
